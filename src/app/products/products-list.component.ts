@@ -1,9 +1,7 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { Observable, range, Subscription } from "rxjs";
-import { map, filter } from "rxjs/operators";
+import { Subscription } from "rxjs";
 import { IProducts } from "./products";
 import { ProductsService } from "./products.service";
-
 
 @Component({
   selector: 'pm-products',
@@ -18,9 +16,6 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   showImage: boolean = false;
   errorMessage: string = '';
   sub!: Subscription
-
-  // teste = '-'
-  // visibility = 'a'
   
   private _listFilter: string = '';
   get listFilter(): string {
@@ -46,15 +41,8 @@ export class ProductsListComponent implements OnInit, OnDestroy {
   imageDisplay(): void {
     this.showImage = !this.showImage;
   }
-  
-  // testeMethod() {
-  //   if (this.teste === '-') {
-  //     this.visibility = 'hidden'
-  //   }
-  // }
 
   ngOnInit(): void {
-    // console.log('OnInit working...');
     this.sub = this.productsService.getProducts().subscribe({
       next: prods => {
         this.products = prods;
@@ -63,7 +51,6 @@ export class ProductsListComponent implements OnInit, OnDestroy {
       error: err => this.errorMessage = err
     })
     // this.listFilter = '' 
-    // this.testeMethod()
   }
 
   ngOnDestroy() {

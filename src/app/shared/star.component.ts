@@ -12,12 +12,13 @@ export class StarComponent implements OnChanges{
     cropWidth: number = 75;
     @Output() ratingClicked: EventEmitter<string> = new EventEmitter<string>()
 
+
     ngOnChanges(): void {
         this.cropWidth = this.rating * 75/5
     }
 
     clickMethod(): void {
-        console.log(`foiiiiiii ${this.rating} foi clicadaa`)
+        console.log(`${this.rating} was clicked`)
     }
 
     anotherClickMethod(): void {

@@ -2,8 +2,7 @@
  import { IProducts } from "./products";
  import { HttpClient, HttpErrorResponse } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
-import { catchError, tap } from "rxjs/operators";
-
+import { catchError, map, tap } from "rxjs/operators";
 
  @Injectable({
      providedIn: 'root'
@@ -20,6 +19,16 @@ import { catchError, tap } from "rxjs/operators";
              catchError(this.handleError)
          );
      }
+
+    // Get one product
+    // Since we are working with a json file, we can only retrieve all products
+    // So retrieve all products and then find the one we want using 'map
+     getProduct(id: number): Observable<IProducts | undefined> {
+        return this.getProducts()
+          .pipe(
+            map((products: IProducts[]) => products.find(p => p.productId === id))
+          );
+      }
 
      private handleError(err: HttpErrorResponse){
          //em uma aplicação real, podemos enviar o servidor para alguma infraestrutura de registro remota, ao invés de só registrar no console com o console.log

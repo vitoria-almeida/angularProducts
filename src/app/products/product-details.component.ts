@@ -1,31 +1,35 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { IProducts } from './products';
+import { ProductsService } from './products.service';
 
 @Component({
   selector: 'pm-product-details',
-  templateUrl: './product-details.component.html',
-  styleUrls: ['./product-details.component.css']
+  templateUrl: './product-details.component.html'
 })
+
 export class ProductDetailsComponent implements OnInit {
-  pageTitle: string = 'Product Detail';
+  pageTitle = 'Product Detail';
+  errorMessage = '';
   product: IProducts | undefined;
 
-  constructor(private route: ActivatedRoute, private router: Router) { }
+  constructor(private route: ActivatedRoute,
+              private router: Router,
+              private productService: ProductsService) {
+  }
 
   ngOnInit(): void {
     const id = Number(this.route.snapshot.paramMap.get('id'));
-    this.pageTitle += ` - ID ${id}`
-    this.product = {
-      "productId": 2,
-      "productName": "Garden Cart",
-      "productCode": "GDN-0023",
-      "releaseDate": "March 18, 2021",
-      "description": "15 gallon capacity rolling garden cart",
-      "price": 32.99,
-      "starRating": 4.2,
-      "imageUrl": "assets/images/garden_cart.png"
+    if (id) {
+      this.getProduct(id);
     }
+  }
+
+  getProduct(id: number): void {
+    this.productService.getProduct(id).subscribe({
+      next: product => this.product = product,
+      error: err => this.errorMessage = err
+    });
   }
 
   backToProducts(): void {
