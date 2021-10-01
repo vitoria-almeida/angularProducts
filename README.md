@@ -4,11 +4,11 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 Link: https://vitoria-almeida.github.io/angularProducts/
 
 <p>
-    <img width: "400" src="src/assets/images/print1.png"
+    <img width: "400" src="src/assets/images/print1.jpg"
 </p>
   <p>
-    <img width: "400" src="src/assets/images/print2.png"
+    <img width: "400" src="src/assets/images/print2.jpg"
 </p>
     <p>
-    <img width: "400" src="src/assets/images/print3.png"
+    <img width: "400" src="src/assets/images/print3.jpg"
 </p>
